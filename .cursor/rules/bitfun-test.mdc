@@ -1,0 +1,27 @@
+---
+description: bitfun_test — pytest platform marks + aw adapters (oh/mac/win)
+alwaysApply: true
+---
+
+# bitfun_test Agent Rules
+
+Read `docs/AGENT-RULES.md` before any edit.
+
+## Entry
+
+```bash
+pytest testcases/ --platform={oh|mac|win} -m "{platform} or all"
+```
+
+## Structure
+
+- `testcases/` — pytest cases only (`test_*.py`); NO platform subdirs under testcases/
+- `aw/oh.py`, `aw/desktop.py` — platform UI; case files use `app` fixture only
+- OH UI: Hypium + hdc only
+
+## Forbidden
+
+- `harmony/`, `e2e/`, new `testcases/*.json` (Hypium 工程模式 json)
+- WebDriverIO/TS copied from product repo
+- `UiDriver`/`BY` inside `testcases/test_*.py` (belongs in `aw/`)
+- Fake PASS without device on OH

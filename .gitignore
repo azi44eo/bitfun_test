@@ -1,3 +1,17 @@
+# HarmonyOS / Hypium project
+.venv/
+venv/
+reports/
+output/
+__pycache__/
+*.pyc
+.pytest_cache/
+.idea/
+.vscode/
+*.hap
+*.app
+local_packages/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
