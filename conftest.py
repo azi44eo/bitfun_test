@@ -60,7 +60,7 @@ def oh_driver(request):
         return
 
     from hypium import UiDriver
-    driver = UiDriver()
+    driver = UiDriver.connect(connector="hdc")
     yield driver
     driver.stop_app(_BITFUN_BUNDLE)
 
