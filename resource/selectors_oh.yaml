@@ -1,0 +1,53 @@
+# OH 控件选择器登记表
+# by: text | key | type | position | offset_from
+
+version: 1
+
+selectors:
+  main_shell:
+    description: 启动后主壳/欢迎页标题栏区域
+    by: text
+    value: "欢迎使用 Close 欢迎使用"
+    match: CONTAINS
+    source: UiViewer
+    confirmed: true
+
+  new_claw_session:
+    description: 侧栏「新建 Claw 会话1」入口
+    by: text
+    value: "新建 Claw 会话 1"
+    match: CONTAINS
+    source: UiViewer
+    confirmed: true
+
+  claw_session_pane:
+    description: 新建后的 Claw 会话界面锚点
+    by: text
+    value: "会话 新建 Claw 会话 1"
+    match: CONTAINS
+    source: UiViewer
+    confirmed: true
+
+  chat_input:
+    description: 会话底部输入框占位符
+    by: text
+    value: "有什么可以帮您..."
+    match: CONTAINS
+    source: UiViewer
+    confirmed: true
+
+  chat_send_button:
+    description: 发送箭头按钮中心（UiViewer Position）
+    by: position
+    x: 2536
+    y: 1552
+    source: UiViewer
+    confirmed: true
+
+  toast_dialog_execution_failed:
+    description: 发送失败提示
+    by: text
+    value: "对话执行失败"
+    match: CONTAINS
+    source: UiViewer
+    confirmed: true

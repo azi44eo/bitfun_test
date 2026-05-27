@@ -7,9 +7,10 @@
 
 ## 2. UI changes must sync selectors
 
-- When BitFun UI changes (text, key, id), update the corresponding `BY` selector in `aw/`.
-- OH selectors belong in `aw/oh.py`; desktop selectors (future) in `aw/desktop.py`.
-- Do not hard-code selectors in `testcases/`; keep them in the aw layer.
+- OH 控件文案变更时，更新 `resource/selectors_oh.yaml` 中对应 key 的 `value` / `match`（UiViewer 确认）。
+- `aw/oh.py` 通过登记表构建 `BY`；不要在 `testcases/` 硬编码选择器。
+- Desktop selectors (future) use a separate registry under `resource/`.
+- Do not hard-code selectors in `testcases/`; reference stable **selector keys** only.
 
 ## 3. PR / change description must reference smoke intent
 

@@ -16,8 +16,10 @@ pytest testcases/ --platform={oh|mac|win} -m "{platform} or all"
 ## Structure
 
 - `testcases/` — pytest cases only (`test_*.py`); NO platform subdirs under testcases/
-- `aw/oh.py`, `aw/desktop.py` — platform UI; case files use `app` fixture only
+- `docs/smoke-intents.csv` — intent table (Excel); `resource/selectors_oh.yaml` — OH text selectors
+- `aw/oh.py`, `aw/desktop.py` — platform UI; case files use `app` fixture only (`tap`/`wait_for_selector` by key)
 - OH UI: Hypium + hdc only
+- Generate cases: `docs/AI-GENERATE-TESTCASE.md` · workflow: `docs/intent-driven-hypium.md`
 
 ## Forbidden
 

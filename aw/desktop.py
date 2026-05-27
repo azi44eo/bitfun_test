@@ -9,6 +9,10 @@ import pytest
 from aw.base import AppBase
 
 
+def _skip_desktop(platform: str) -> None:
+    pytest.skip(f"DesktopApp ({platform}) not implemented; see docs/REFACTOR-EXECUTION.md R5")
+
+
 class DesktopApp(AppBase):
     """Stub desktop adapter; implementation pending (see docs/REFACTOR-EXECUTION.md R5)."""
 
@@ -16,10 +20,25 @@ class DesktopApp(AppBase):
         self._platform = platform  # "mac" | "win"
 
     def start(self) -> None:
-        pytest.skip(f"DesktopApp ({self._platform}) not implemented; see docs/REFACTOR-EXECUTION.md R5")
+        _skip_desktop(self._platform)
 
     def wait_main_shell(self, timeout: int = 30) -> None:
-        pytest.skip(f"DesktopApp ({self._platform}) not implemented; see docs/REFACTOR-EXECUTION.md R5")
+        _skip_desktop(self._platform)
 
     def assert_main_visible(self) -> None:
-        pytest.skip(f"DesktopApp ({self._platform}) not implemented; see docs/REFACTOR-EXECUTION.md R5")
+        _skip_desktop(self._platform)
+
+    def tap(self, selector_key: str) -> None:
+        _skip_desktop(self._platform)
+
+    def wait_for_selector(self, selector_key: str, timeout: int = 30) -> None:
+        _skip_desktop(self._platform)
+
+    def assert_selector_visible(self, selector_key: str) -> None:
+        _skip_desktop(self._platform)
+
+    def input_text(self, selector_key: str, text: str) -> None:
+        _skip_desktop(self._platform)
+
+    def press_enter(self) -> None:
+        _skip_desktop(self._platform)

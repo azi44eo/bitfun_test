@@ -38,20 +38,24 @@ bitfun_test/
 ├── config/
 │   └── user_config.xml        # usb-hdc device config
 ├── testcases/                 # pytest cases (test_*.py, no platform subdirs)
-│   └── test_s01_launch.py
+│   └── test_s01_claw_chat_smoke.py        # OH 冒烟（含启动+会话+发送）
 ├── aw/
 │   ├── __init__.py            # get_app()
 │   ├── base.py                # AppBase protocol
 │   ├── oh.py                  # OhApp (Hypium + hdc)
 │   └── desktop.py             # DesktopApp (mac/win stub, Phase 1 skip)
 ├── resource/
-│   └── .gitkeep
+│   └── selectors_oh.yaml      # OH 控件 text 登记表（意图 / 用例引用 key）
 ├── reports/                   # gitignored
 ├── docs/
 │   ├── AGENT-RULES.md
 │   ├── REFACTOR-EXECUTION.md
 │   ├── AI-EXECUTION-BRIEF.md
 │   ├── smoke-intent-table.md
+│   ├── smoke-intents.csv      # 冒烟意图主表（Excel 打开编辑）
+│   ├── smoke-intents-README.md
+│   ├── intent-driven-hypium.md
+│   ├── AI-GENERATE-TESTCASE.md
 │   ├── e2e-change-rules.md
 │   └── setup-windows-hdc.md
 ├── requirements.txt
@@ -62,7 +66,8 @@ bitfun_test/
 ## Configuration
 
 - **bundleName**：`aw/oh.py` 中 `BITFUN_BUNDLE = "com.huawei.BitFun"`（已通过 hdc 确认）
-- **主界面选择器（OH）**：`aw/oh.py` 中 `MAIN_SHELL_SELECTOR = BY.textContains("欢迎使用")`（已通过 UiViewer 确认）
+- **OH 选择器登记表**：`resource/selectors_oh.yaml`（`main_shell` 等 key；UiViewer 确认后 `confirmed: true`）
+- **意图表（Excel）**：`docs/smoke-intents.csv` · **AI 生成用例**：`docs/AI-GENERATE-TESTCASE.md`
 - **设备 SN**：`config/user_config.xml` 中 `<device sn="..." />`，单设备可留空
 
 ## Troubleshooting
@@ -73,19 +78,22 @@ bitfun_test/
 | `pytest: error: --platform` | `--platform` 参数必填，值为 `oh`、`mac` 或 `win` |
 | `ModuleNotFoundError: hypium` | 确认虚拟环境已激活，`pip install -r requirements.txt`；若 pip 找不到包，尝试华为 PyPI 镜像 |
 | 用例启动应用失败 | 确认 `BITFUN_BUNDLE` 为真实值；确认 BitFun 已安装在鸿蒙 PC 上 |
-| 控件定位失败 | 用 UiViewer 确认控件属性，更新 `aw/oh.py` 中的 `BY` 选择器 |
+| 控件定位失败 | UiViewer 确认后更新 `resource/selectors_oh.yaml` |
 | Mac/Win 测试 skip | Phase 1 预期行为；DesktopApp 尚未实现 |
 
 ## Docs
 
 | 文档 | 说明 |
 |------|------|
+| [**docs/intent-driven-workflow.md**](docs/intent-driven-workflow.md) | **意图驱动端到端说明**（写意图 → AI 生成 → 执行） |
+| [docs/smoke-intents.csv](docs/smoke-intents.csv) | 冒烟意图表（Excel 维护） |
+| [docs/smoke-intents-README.md](docs/smoke-intents-README.md) | 意图表列说明 |
+| [docs/AI-GENERATE-TESTCASE.md](docs/AI-GENERATE-TESTCASE.md) | 给 AI 的生成用例 Prompt |
+| [docs/smoke-intent-table.md](docs/smoke-intent-table.md) | 意图索引（指向 CSV + 流程） |
+| [docs/intent-driven-hypium.md](docs/intent-driven-hypium.md) | 三层分工简版 |
 | [docs/AGENT-RULES.md](docs/AGENT-RULES.md) | Agent 硬性规则（最高优先级） |
-| [docs/REFACTOR-EXECUTION.md](docs/REFACTOR-EXECUTION.md) | 多平台重构任务书 |
-| [docs/smoke-intent-table.md](docs/smoke-intent-table.md) | 冒烟意图与用例映射 |
 | [docs/e2e-change-rules.md](docs/e2e-change-rules.md) | 改测试规则 |
 | [docs/setup-windows-hdc.md](docs/setup-windows-hdc.md) | Windows 安装 hdc |
-| [docs/AI-EXECUTION-BRIEF.md](docs/AI-EXECUTION-BRIEF.md) | 阶段 A 分步交付任务书 |
 
 ## Related
 
@@ -97,7 +105,7 @@ bitfun_test/
 
 - [x] `pytest.ini` + `conftest.py` 多平台 mark 基础设施
 - [x] `aw/base.py` + `aw/oh.py` + `aw/desktop.py` + `aw/__init__.py`
-- [x] `testcases/test_s01_launch.py` 替代 `demo_001_launch`
+- [x] OH 冒烟：`testcases/test_s01_claw_chat_smoke.py`（含启动、Claw 会话、输入发送）
 - [x] `docs/AGENT-RULES.md` 与 pytest 入口一致
 - [x] `BITFUN_BUNDLE` 与 selector 与迁移前一致
 - [x] 未做禁止项（无 WebDriverIO、无平台子目录、无弱化断言）

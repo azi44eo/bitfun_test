@@ -1,0 +1,2 @@
+id,summary,preconditions,steps,expected,not_in_scope,selector_keys,testcase,platforms,status
+S01,启动 BitFun、新建 Claw 会话、输入并发送（无 API 时失败提示）,无（用例内 start）,启动→主壳可见→新建 Claw 会话→输入 Hello→点发送,出现失败提示（如对话执行失败）,不验证 AI 回复成功,main_shell;new_claw_session;claw_session_pane;chat_input;chat_send_button;toast_dialog_execution_failed,testcases/test_s01_claw_chat_smoke.py,oh,已实现

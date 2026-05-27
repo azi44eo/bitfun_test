@@ -1,3 +1,4 @@
 # Requires Python 3.10.x
 hypium>=6.0.7,<7
 pytest>=7.4,<9
+PyYAML>=6.0,<7
